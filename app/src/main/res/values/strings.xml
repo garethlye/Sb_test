@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SB-Test</string>
+    <string name="swipe_up_text">Swipe up</string>
+    <string name="title_text">Title</string>
+    <string name="overview_text">Overview</string>
+    <string name="rating_text">Rating</string>
+    <string name="release_date_text">Release date</string>
+
+</resources>

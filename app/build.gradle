@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.my.sb_test"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    android {
+        compileOptions.incremental = false
+    }
+    dependencies {
+
+    }
+}
+
+dependencies {
+
+    ext.RX_JAVA_VERSION = '1.1.6'
+    ext.RX_JAVA_2_VERSION = '2.0.1'
+    ext.RX_ANDROID_VERSION = '1.2.1'
+    ext.BUTTERKNIFE_SDK_VERSION = '8.8.1'
+    ext.DAGGER2_VERSION = '2.11'
+    ext.DATA_BINDING_SDK_VERSION = '1.3.3'
+    ext.OKHTTP_SDK_VERSION = '3.11.0'
+    ext.SQUAREUP_OKIO_VERSION = '1.13.0'
+    ext.DAGGER2_VERSION = '2.11'
+    ext.RETROFIT_VERSION = '2.3.0'
+    ext.IMMUTABLE_VERSION = '2.2.9'
+
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:support-v4:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Newer Support library stuffs
+    implementation "com.android.support:design:28.0.0"
+    implementation "com.android.support:appcompat-v7:28.0.0"
+    implementation "com.android.support:recyclerview-v7:28.0.0"
+
+    // Rx-Java
+    implementation "io.reactivex:rxandroid:${RX_ANDROID_VERSION}"
+    implementation "io.reactivex:rxjava:${RX_JAVA_VERSION}"
+    implementation "io.reactivex.rxjava2:rxandroid:${RX_JAVA_2_VERSION}"
+
+
+    // ButterKnife
+    implementation "com.jakewharton:butterknife:${BUTTERKNIFE_SDK_VERSION}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_SDK_VERSION}"
+
+    //OkHttp
+    debugImplementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP_SDK_VERSION}"
+    releaseImplementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP_SDK_VERSION}"
+    implementation "com.squareup.okhttp3:okhttp:${OKHTTP_SDK_VERSION}"
+    implementation "com.squareup.okio:okio:${SQUAREUP_OKIO_VERSION}"
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:${DAGGER2_VERSION}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER2_VERSION}"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+
+    // Retrofit 2
+    implementation "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
+    implementation "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_VERSION}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT_VERSION}"
+    implementation "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
+
+    // http://immutables.github.io
+    annotationProcessor "org.immutables:value:${IMMUTABLE_VERSION}" // for annotation processor
+    compileOnly "org.immutables:value:${IMMUTABLE_VERSION}"
+    compileOnly "org.immutables:gson:${IMMUTABLE_VERSION}" // for annotations
+    compileOnly "org.immutables:builder:${IMMUTABLE_VERSION}" // for annotations
+
+
+    //Primarily only using Fresco for better memory management for the images~
+    implementation('com.facebook.fresco:fresco:0.14.1') {
+        exclude group: 'com.parse.bolts', module: 'bolts-applinks'
+        exclude module: 'bolts-android'
+        exclude group: 'com.parse.bolts', module: 'bolts-tasks'
+    }
+
+    //Layout Utils
+    implementation 'com.synnapps:carouselview:0.1.5'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+}

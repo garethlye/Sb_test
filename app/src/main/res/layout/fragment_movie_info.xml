@@ -1,0 +1,92 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.my.sb_test.viewModel.MovieInfoFragmentViewModel"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/container"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/title_text"
+            android:textColor="@color/warm_gray"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="AVENGERS ENDGAMES"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/overview_text"
+            android:textColor="@color/warm_gray"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@{viewModel.overview}"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="Lot's of cool shit happens and iron man dies,
+            Lot's of cool shit happens and iron man dies,
+            Lot's of cool shit happens and iron man dies."/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/title_text"
+            android:textColor="@color/warm_gray"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@{viewModel.rating}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="8.65/10"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/release_date_text"
+            android:textColor="@color/warm_gray"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@{viewModel.releaseDate}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="20-10-1995"/>
+
+    </LinearLayout>
+</layout>
