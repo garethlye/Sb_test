@@ -21,10 +21,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
             android:layout_gravity="bottom|right"
             android:drawableStart="@drawable/ic_arrow_up"
             android:drawablePadding="8dp"
+            android:padding="16dp"
             android:gravity="center"
             android:onClick="@{viewModel::onShowMoreClicked}"
             android:text="@string/swipe_up_text"

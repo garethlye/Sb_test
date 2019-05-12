@@ -1,12 +1,9 @@
 package com.my.sb_test.Util;
 
-import android.databinding.ObservableBoolean;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.my.sb_test.viewModel.MainViewModel;
-
-import java.util.List;
 
 /**
  * Created by G-Man garethlye on 2019-05-12
@@ -54,7 +51,6 @@ public abstract class EndlessOnScrollRecyclerViewListener  extends RecyclerView.
 
     @Override
     public void onScrolled(RecyclerView view, int dx, int dy) {
-        //int lastVisibleItem = mLayoutManager.get();
         int[] lastVisibleItemPositions = mLayoutManager.findLastVisibleItemPositions(null);
         // get maximum element within the list
         int lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);

@@ -7,12 +7,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.synnapps.carouselview.CarouselView;
-
 /**
  * Created by G-Man garethlye on 2019-05-12
  */
-public class CustomOnSlidingTouchListener implements CarouselView.OnTouchListener {
+public class CustomOnSlidingTouchListener implements LinearLayout.OnTouchListener {
 
     private final GestureDetector gestureDetector;
 

@@ -66,13 +66,10 @@ public class MovieInfoActivity extends AppCompatActivity {
     }
 
     private void bindData() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mViewModel = new MovieInfoViewModelImpl(MovieInfoActivity.this, mMovie, mCarouselView, container);
-                ActivityMovieInfoBinding binding = DataBindingUtil.bind(container);
-                binding.setViewModel(mViewModel);
-            }
+        new Handler().postDelayed(() -> {
+            mViewModel = new MovieInfoViewModelImpl(MovieInfoActivity.this, mMovie, mCarouselView);
+            ActivityMovieInfoBinding binding = DataBindingUtil.bind(container);
+            binding.setViewModel(mViewModel);
         }, 200);
 
     }

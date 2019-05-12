@@ -6,23 +6,20 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
 import android.widget.Toast;
 
 import com.my.sb_test.AppConstants;
 import com.my.sb_test.MainActivity;
+import com.my.sb_test.R;
 import com.my.sb_test.Util.EndlessOnScrollRecyclerViewListener;
 import com.my.sb_test.adapter.PopularMovieAdapter;
 import com.my.sb_test.api.DataApi;
-import com.my.sb_test.api.PopularMovieResponse;
 import com.my.sb_test.data.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -50,12 +47,7 @@ public class MainViewModelImpl implements MainViewModel {
 
     private void stopLoading() {
         //delayed loading state transition
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mCurrentlyLoading.set(false);
-            }
-        }, 500);
+        new Handler().postDelayed(() -> mCurrentlyLoading.set(false), 500);
     }
 
     @Override
@@ -67,29 +59,18 @@ public class MainViewModelImpl implements MainViewModel {
                     page)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnTerminate(new Action0() {
-                        @Override
-                        public void call() {
-                            stopLoading();
+                    .doOnTerminate(() -> stopLoading())
+                    .subscribe(popularMovieResponse -> {
+                        Toast.makeText(mContext, mContext.getString(R.string.loading_text), Toast.LENGTH_SHORT).show();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        if (page == 1) {
+                            setupRecyclerView(popularMovieResponse.results());
+                            return;
                         }
-                    })
-                    .subscribe(new Action1<PopularMovieResponse>() {
-                        @Override
-                        public void call(final PopularMovieResponse popularMovieResponse) {
-                            Toast.makeText(mContext, String.valueOf(page), Toast.LENGTH_SHORT).show();
-                            mSwipeRefreshLayout.setRefreshing(false);
-                            if (page == 1) {
-                                setupRecyclerView(popularMovieResponse.results());
-                                return;
-                            }
-                            mMovieList.addAll(popularMovieResponse.results());
-                        }
-                    }, new Action1<Throwable>() {
-                        @Override
-                        public void call(final Throwable throwable) {
-                            Toast.makeText(mContext, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
+                        mMovieList.addAll(popularMovieResponse.results());
+                    }, throwable -> {
+                        Toast.makeText(mContext, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        mSwipeRefreshLayout.setRefreshing(false);
                     });
         }
     }

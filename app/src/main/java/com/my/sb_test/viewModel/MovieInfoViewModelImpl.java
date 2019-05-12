@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.my.sb_test.MovieInfoActivity;
-import com.my.sb_test.R;
-import com.my.sb_test.Util.CustomOnSlidingTouchListener;
 import com.my.sb_test.data.Movie;
 import com.my.sb_test.fragment.MovieInfoFragment;
 import com.synnapps.carouselview.CarouselView;
@@ -21,7 +19,6 @@ public class MovieInfoViewModelImpl implements MovieInfoViewModel {
     private MovieInfoActivity mContext;
     private Movie             mMovie;
     private CarouselView      mCarouselView;
-    private View              mContainer;
     private MovieInfoFragment fragment;
 
     ImageListener imageListener = new ImageListener() {
@@ -33,12 +30,10 @@ public class MovieInfoViewModelImpl implements MovieInfoViewModel {
 
     public MovieInfoViewModelImpl(final MovieInfoActivity context,
                                   final Movie movie,
-                                  final CarouselView carouselView,
-                                  final View container) {
+                                  final CarouselView carouselView) {
         mContext = context;
         mMovie = movie;
         mCarouselView = carouselView;
-        mContainer = container;
 
         setupCarouselImageView();
     }
@@ -48,14 +43,13 @@ public class MovieInfoViewModelImpl implements MovieInfoViewModel {
         mCarouselView.setPageCount(5);
     }
 
-    public void showMovieInfoFragment(Movie movie) {
+    private void showMovieInfoFragment(Movie movie) {
         final FragmentManager manager = mContext.getSupportFragmentManager();
-        MovieInfoFragment fragment = MovieInfoFragment.newInstance(movie);
+        fragment = MovieInfoFragment.newInstance(movie);
         try {
             fragment.show(manager, MovieInfoFragment.EXTRA_PREFIX);
         } catch (IllegalStateException e) {
-            // State Loss. For detail explanation of this issue:
-            // http://www.androiddesignpatterns.com/2013/08/fragment-transaction-commit-state-loss.html
+            //in case of stateloss
         }
     }
 
